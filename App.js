@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -14,6 +14,7 @@ import {
   View,
   Text,
   StatusBar,
+  Button,
 } from 'react-native';
 
 import {
@@ -24,11 +25,24 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+const Testing = () => {
+  const [count, setCount] = useState(0);
+  return (<View style={styles.sectionContainer}>
+    <Text>You clicked {count} times</Text>
+    <Button onPress={() => setCount(count + 1)} title="Click me" />
+  </View>
+  );
+}
+
 const App: () => React$Node = () => {
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
+
+        <Testing />
+
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
