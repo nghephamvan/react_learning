@@ -1,0 +1,6 @@
+module Pods_HelloProject {
+  umbrella header "Pods-HelloProject-umbrella.h"
+
+  export *
+  module * { export * }
+}
