@@ -15,6 +15,7 @@ import {
   Text,
   StatusBar,
   Button,
+  TextInput,
 } from 'react-native';
 
 import {
@@ -26,10 +27,27 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 const Testing = () => {
-  const [count, setCount] = useState(0);
+  let [email, setEmail] = useState('');
+  let [pass, setPass] = useState('');
+
   return (<View style={styles.sectionContainer}>
-    <Text>You clicked {count} times</Text>
-    <Button onPress={() => setCount(count + 1)} title="Click me" />
+    <TextInput 
+      style={{height: 40}}
+      placeholder="Email"
+      keyboardType="email-address"
+      placeholderTextColor = "#9a73ef"
+      onChangeText={txt => setEmail(txt)}
+    />
+    <TextInput 
+      style={{height: 40}}
+      secureTextEntry={true}
+      placeholder="Password"
+      placeholderTextColor = "#9a73ef"
+      onChangeText={txt => setPass(txt)}
+    />
+    <Button onPress={() => {
+     alert('Email=$email, pass=$pass' + email + pass)
+    }} title="Click me" />
   </View>
   );
 }
