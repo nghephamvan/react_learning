@@ -15,7 +15,9 @@ import {
   Text,
   StatusBar,
   Button,
+  TouchableOpacity,
   TextInput,
+  Image,
 } from 'react-native';
 
 import {
@@ -61,6 +63,21 @@ const App: () => React$Node = () => {
 
         <InputTextTest />
 
+        <View style={styles.searchViewContainer}>
+          <TextInput style={styles.inputSearch}
+            borderBottomColor="Green"
+            placeholder= 'Search'/>
+          <TouchableOpacity style={styles.button} onPress={()=>{alert("you clicked me")}}>
+          <Image style={{resizeMode:"center"}} source={{
+            uri:'https://reactjs.org/logo-og.png',
+            method: 'POST',
+            headers: {
+              Pragma: 'no-cache'
+            },
+            body: 'Your Body goes here'}}/>
+        </TouchableOpacity>
+        </View>
+
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
@@ -105,6 +122,29 @@ const App: () => React$Node = () => {
 };
 
 const styles = StyleSheet.create({
+  searchViewContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  button: {
+    width: 40,
+    height: 40,
+    backgroundColor: '#859a9b',
+    borderRadius: 20,
+    shadowColor: '#303838',
+    shadowOffset: { width: 0, height: 5 },
+    shadowRadius: 10,
+    shadowOpacity: 0.35,
+  },
+  inputSearch: {
+    height: 40,
+    width: "75%",
+    marginStart: 20,
+    textAlign: "left",
+    borderBottomColor: "#232323",
+    borderBottomWidth: 1,
+    justifyContent:"flex-start"
+  },
   scrollView: {
     backgroundColor: Colors.lighter,
   },
