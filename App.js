@@ -26,7 +26,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const Testing = () => {
+const InputTextTest = () => {
   let [email, setEmail] = useState('');
   let [pass, setPass] = useState('');
 
@@ -59,7 +59,7 @@ const App: () => React$Node = () => {
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
 
-        <Testing />
+        <InputTextTest />
 
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
