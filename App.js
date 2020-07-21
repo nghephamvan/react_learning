@@ -18,7 +18,7 @@ const Stack = createStackNavigator();
 const MyStack = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Signup"
+      initialRouteName="Login"
       screenOptions={{
         headerTitleAlign: 'center',
         headerStyle: { backgroundColor: '#3740FE' },

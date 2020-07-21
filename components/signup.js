@@ -62,6 +62,7 @@ export default class Signup extends Component {
                 <TextInput
                     style={styles.inputStyle}
                     placeholder="Email"
+                    keyboardType="email-address"
                     value={this.state.email}
                     onChangeText={(val) => this.updateInputVal(val, 'email')}
                 />

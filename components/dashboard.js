@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import firebase from '../database/firebase';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, ScrollView, SafeAreaView, StyleSheet } from 'react-native';
 
 export default class Dashboard extends Component {
     constructor() {
@@ -23,18 +23,34 @@ export default class Dashboard extends Component {
         }
 
         return (
-            <View style={styles.container}>
-                <Text style={styles.textStyle}>
-                    Welcome {this.state.name}
-                </Text>
+            <SafeAreaView>
+               
+                <ScrollView
+                    contentInsetAdjustmentBehavior="automatic">
+                         <View style={styles.header} >
+                    <Text style={styles.textStyle}>
+                        Welcome {this.state.name}
+                    </Text>
 
-                <Button color="#3740FE" title="Logout" onPress={()=> this.signOut()}/>
-            </View>
+                    <Button color="#3740FE" title="Logout" onPress={() => this.signOut()} />
+                </View>
+                    <View style={styles.container}>
+                        <Text style={styles.textStyle}>
+                            Welcome {this.state.name}
+                        </Text>
+                    </View>
+                </ScrollView>
+            </SafeAreaView>
         );
     }
 }
 
 const styles = StyleSheet.create({
+    header: {
+        flex: 1,
+        flexDirection: "row",
+        justifyContent: "flex-end"
+    },
     container: {
         flex: 1,
         display: "flex",
@@ -45,6 +61,8 @@ const styles = StyleSheet.create({
     },
     textStyle: {
         fontSize: 15,
-        marginBottom: 20
+        marginTop: 10,
+        marginRight: 10,
+        marginBottom: 10
     }
 });
