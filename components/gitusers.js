@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Api from '../network/api';
 import ImageCustom from '../Image/ImageCustom';
-import { View, ActivityIndicator, FlatList, Image, StyleSheet } from 'react-native';
+import { View, ActivityIndicator, FlatList, StyleSheet } from 'react-native';
 
 export default class GitUsers extends Component {
     constructor() {
@@ -80,7 +80,6 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        padding: 5,
         backgroundColor: '#000'
     },
     textStyle: {
