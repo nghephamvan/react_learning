@@ -12,16 +12,19 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from './components/login';
 import Signup from './components/signup';
 import Dashboard from './components/dashboard';
+import GitUsers from './components/gitusers';
+
 
 const Stack = createStackNavigator();
 
 const MyStack = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Login"
+      initialRouteName="Git users"
       screenOptions={{
+        headerStatusBarHeight: 30,
         headerTitleAlign: 'center',
-        headerStyle: { backgroundColor: '#3740FE' },
+        headerStyle: { backgroundColor: '#f4511e' },
         headerTintColor: '#fff',
         headerTitleStyle: { fontWeight: 'bold' }
       }}>
@@ -39,6 +42,11 @@ const MyStack = () => {
         name="Dashboard"
         component={Dashboard}
         options={{ title: "Dashboard" }, { headerLeft: null }}
+      />
+       <Stack.Screen
+        name="Git users"
+        component={GitUsers}
+        options={{ title: "Git users" }, { headerLeft: null }}
       />
     </Stack.Navigator>
   );
