@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Api from '../network/api';
 import firebase from '../database/firebase'
 import ImageCustom from '../Image/ImageCustom';
-import { View, Button, ActivityIndicator, FlatList, StyleSheet } from 'react-native';
+import { View, Button, ActivityIndicator, FlatList, TouchableHighlight, StyleSheet } from 'react-native';
 
 export default class GitUsers extends Component {
     constructor() {
@@ -16,6 +16,15 @@ export default class GitUsers extends Component {
 
     componentDidMount() {
         this.getUsers()
+        this.props.navigation.setOptions({
+            title: 'Welcome ' + this.state.name,
+            headerRight: () => (
+                <Button
+                    onPress={() => this.signOut()}
+                    title="Logout"
+                    color="#fff"
+                />)
+        })
     }
 
     signOut = () => {
@@ -25,18 +34,17 @@ export default class GitUsers extends Component {
     }
 
     getUsers = () => {
-        this.setState({ isloading: true })
         Api.get('/search/users', {
             params: {
-                per_page: 20,
+                per_page: 21,
                 q: 'nghe'
             }
         })
             .then((res) => {
                 if (res.data.items !== '' || res.data.items !== null) {
-                    this.setState({ users: res.data.items, isLoading: false })
+                    this.setState({ isLoading: false, users: res.data.items })
                 }
-                console.log(res.data)
+                console.log('get data')
             })
             .catch(err => console.error(err))
             .finally(this.setState({ isLoading: false }))
@@ -47,7 +55,12 @@ export default class GitUsers extends Component {
         }
     }
 
+    onPression(name) {
+        console.log('onPression = ' + name)
+    }
+
     render() {
+        console.log("render")
         if (this.state.isLoading) {
             return (
                 <View style={styles.preloader}>
@@ -55,21 +68,14 @@ export default class GitUsers extends Component {
                 </View>
             )
         } else {
-            this.props.navigation.setOptions({
-                headerTitle: this.state.name,
-                headerRight: () => (
-                    <Button
-                        onPress={() => this.signOut()}
-                        title="Logout"
-                        color="#fff"
-                    />)
-            })
             return (
                 <View style={styles.container}>
                     <FlatList
                         data={this.state.users}
                         renderItem={({ item }) => (
-                            <ImageCustom imageUri={item.avatar_url} name={item.login} />
+                            <TouchableHighlight onPress={() => this.onPression(item.login)} style={styles.container}>
+                                <ImageCustom imageUri={item.avatar_url} name={item.login} />
+                            </TouchableHighlight>
                         )}
                         //Setting the number of column
                         numColumns={3}
