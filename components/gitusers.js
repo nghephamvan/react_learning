@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import Api from '../network/api';
+import firebase from '../database/firebase'
 import ImageCustom from '../Image/ImageCustom';
-import { View, ActivityIndicator, FlatList, StyleSheet } from 'react-native';
+import { View, Button, ActivityIndicator, FlatList, StyleSheet } from 'react-native';
 
 export default class GitUsers extends Component {
     constructor() {
         super();
         this.state = {
             users: [],
-            isLoading: false
+            isLoading: false,
+            uid: ''
         }
     }
 
@@ -16,9 +18,15 @@ export default class GitUsers extends Component {
         this.getUsers()
     }
 
-    getUsers = async () => {
+    signOut = () => {
+        firebase.auth().signOut().then(() => {
+            this.props.navigation.navigate('Login')
+        }).catch(error => this.setState({ errorMessage: error.message }))
+    }
+
+    getUsers = () => {
         this.setState({ isloading: true })
-        await Api.get('/search/users', {
+        Api.get('/search/users', {
             params: {
                 per_page: 20,
                 q: 'nghe'
@@ -32,6 +40,11 @@ export default class GitUsers extends Component {
             })
             .catch(err => console.error(err))
             .finally(this.setState({ isLoading: false }))
+
+        this.state = {
+            name: firebase.auth().currentUser.displayName,
+            uid: firebase.auth().currentUser.uid
+        }
     }
 
     render() {
@@ -42,12 +55,21 @@ export default class GitUsers extends Component {
                 </View>
             )
         } else {
+            this.props.navigation.setOptions({
+                headerTitle: this.state.name,
+                headerRight: () => (
+                    <Button
+                        onPress={() => this.signOut()}
+                        title="Logout"
+                        color="#fff"
+                    />)
+            })
             return (
                 <View style={styles.container}>
                     <FlatList
                         data={this.state.users}
                         renderItem={({ item }) => (
-                            <ImageCustom imageUri={item.avatar_url} name={item.login}/>
+                            <ImageCustom imageUri={item.avatar_url} name={item.login} />
                         )}
                         //Setting the number of column
                         numColumns={3}

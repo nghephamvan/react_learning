@@ -20,7 +20,7 @@ const Stack = createStackNavigator();
 const MyStack = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Git users"
+      initialRouteName="Login"
       screenOptions={{
         headerStatusBarHeight: 30,
         headerTitleAlign: 'center',
@@ -44,7 +44,7 @@ const MyStack = () => {
         options={{ title: "Dashboard" }, { headerLeft: null }}
       />
        <Stack.Screen
-        name="Git users"
+        name="Gitusers"
         component={GitUsers}
         options={{ title: "Git users" }, { headerLeft: null }}
       />

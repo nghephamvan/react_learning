@@ -37,7 +37,7 @@ export default class Login extends Component {
                     password: ''
                 })
 
-                this.props.navigation.navigate('Dashboard')
+                this.props.navigation.navigate('Gitusers')
             })
             .catch(error => this.setState({ errorMessage: error.message }))
     }
