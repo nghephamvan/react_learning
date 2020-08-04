@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import firebase from '../database/firebase'
 import { Alert, View, ActivityIndicator, Button, Text, TextInput, StyleSheet } from 'react-native';
+import { LoginButton, AccessToken } from 'react-native-fbsdk';
+import FB, { fbService } from '../services/FBService'
+
 
 export default class Login extends Component {
     constructor() {
@@ -68,7 +71,10 @@ export default class Login extends Component {
                     maxLength={15}
                     secureTextEntry={true}
                 />
-                <Button color="#3740FE" title="Signin" onPress={() => this.userLogin()} />
+                <View style={styles.login_button_area}>
+                    <Button color="#3740FE" title="Sign in" onPress={() => this.userLogin()} />
+                    {FB.FBButton}
+                </View>
                 <Text style={styles.loginText} onPress={() => this.props.navigation.navigate('Signup')}>
                     Don't have account? Clickk here to signup
                 </Text>
@@ -78,6 +84,11 @@ export default class Login extends Component {
 }
 
 const styles = StyleSheet.create({
+    login_button_area: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        alignSelf:'center'
+    },
     container: {
         flex: 1,
         display: "flex",

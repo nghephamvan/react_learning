@@ -8,6 +8,8 @@ target 'HelloProject' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
+
   target 'HelloProjectTests' do
     inherit! :complete
     # Pods for testing
